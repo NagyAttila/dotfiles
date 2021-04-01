@@ -1,14 +1,28 @@
-" -----------------------------------------------------------------------------
+ "-----------------------------------------------------------------------------
 " This config is targeted for Vim 8.1+ and expects you to have Plug installed.
 " -----------------------------------------------------------------------------
 
 " -----------------------------------------------------------------------------
 " Plugins
 " -----------------------------------------------------------------------------
+"
+"
 
 " Specify a directory for plugins.
 call plug#begin('~/.vim/plugged')
 
+""" Mine:
+Plug 'aluriak/nerdcommenter'
+Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'luochen1990/rainbow'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+Plug 'gustafj/vim-ttcn'
+Plug 'zef/vim-cycle'
+
+
+""" Original:
 " Atom One Dark / Light theme.
 Plug 'rakr/vim-one'
 
@@ -54,7 +68,7 @@ Plug 'unblevable/quick-scope'
 Plug 'nelstrom/vim-visual-star-search'
 
 " Automatically clear search highlights after you move your cursor.
-Plug 'haya14busa/is.vim'
+"Plug 'haya14busa/is.vim'
 
 " Handle multi-file find and replace.
 Plug 'mhinz/vim-grepper'
@@ -63,10 +77,10 @@ Plug 'mhinz/vim-grepper'
 Plug 'ntpeters/vim-better-whitespace'
 
 " Toggle comments in various ways.
-Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-commentary'
 
 " Automatically set 'shiftwidth' + 'expandtab' (indention) based on file type.
-Plug 'tpope/vim-sleuth'
+"Plug 'tpope/vim-sleuth'
 
 " A number of useful motions for the quickfix list, pasting and more.
 Plug 'tpope/vim-unimpaired'
@@ -87,7 +101,6 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
 
 " A bunch of useful language related snippets (ultisnips is the engine).
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " Automatically show Vim's complete menu while typing.
 Plug 'vim-scripts/AutoComplPop'
@@ -146,7 +159,7 @@ colorscheme gruvbox
 set background=dark
 
 " Specific colorscheme settings (must come after setting your colorscheme).
-if (g:colors_name == 'gruvbox')
+"if (g:colors_name == 'gruvbox')
   if (&background == 'dark')
     hi Visual cterm=NONE ctermfg=NONE ctermbg=237 guibg=#3a3a3a
   else
@@ -154,7 +167,7 @@ if (g:colors_name == 'gruvbox')
     hi CursorLine cterm=NONE ctermfg=NONE ctermbg=228 guibg=#f2e5bc
     hi ColorColumn cterm=NONE ctermfg=NONE ctermbg=228 guibg=#f2e5bc
   endif
-endif
+"endif
 
 " Spelling mistakes will be colored up red.
 hi SpellBad cterm=underline ctermfg=203 guifg=#ff5f5f
@@ -186,18 +199,19 @@ let &statusline = s:statusline_expr()
 "   Research any of these by running :help <setting>
 " -----------------------------------------------------------------------------
 
-let mapleader=" "
-let maplocalleader=" "
+let mapleader='\'
+let maplocalleader='\'
 
-set autoindent
+"set autoindent
 set autoread
 set backspace=indent,eol,start
 set backupdir=/tmp//,.
 set clipboard=unnamedplus
-set colorcolumn=80
+set colorcolumn=120
 set complete+=kspell
 set completeopt=menuone,longest
 set cursorline
+set cursorcolumn
 set directory=/tmp//,.
 set encoding=utf-8
 set expandtab smarttab
@@ -210,28 +224,27 @@ set laststatus=2
 set matchpairs+=<:> " Use % to jump between pairs
 set mmp=5000
 set modelines=2
-set mouse=a
 set nocompatible
 set noerrorbells visualbell t_vb=
 set noshiftround
 set nospell
 set nostartofline
-set number relativenumber
+set number
 set regexpengine=1
 set ruler
 set scrolloff=3
-set shiftwidth=2
+set shiftwidth=4
 set showcmd
 set showmatch
 set shortmess+=c
 set showmode
 set smartcase
-set softtabstop=2
+set softtabstop=4
 set spelllang=en_us
 set splitbelow
 set splitright
-set tabstop=2
-set textwidth=0
+set tabstop=4
+set textwidth=120
 set ttimeout
 set timeoutlen=1000
 set ttimeoutlen=0
@@ -326,10 +339,10 @@ inoremap <F7> <C-o>:set list!<CR>
 cnoremap <F7> <C-c>:set list!<CR>
 
 " Move 1 more lines up or down in normal and visual selection modes.
-nnoremap K :m .-2<CR>==
-nnoremap J :m .+1<CR>==
-vnoremap K :m '<-2<CR>gv=gv
-vnoremap J :m '>+1<CR>gv=gv
+"nnoremap K :m .-2<CR>==
+"nnoremap J :m .+1<CR>==
+"vnoremap K :m '<-2<CR>gv=gv
+"vnoremap J :m '>+1<CR>gv=gv
 
 " Toggle quickfix window.
 function! QuickFix_toggle()
@@ -566,11 +579,11 @@ xmap gr <plug>(GrepperOperator)
 " After searching for text, press this mapping to do a project wide find and
 " replace. It's similar to <leader>r except this one applies to all matches
 " across all files instead of just the current file.
-nnoremap <Leader>R
-  \ :let @s='\<'.expand('<cword>').'\>'<CR>
-  \ :Grepper -cword -noprompt<CR>
-  \ :cfdo %s/<C-r>s//g \| update
-  \<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+"nnoremap <Leader>R
+  "\ :let @s='\<'.expand('<cword>').'\>'<CR>
+  "\ :Grepper -cword -noprompt<CR>
+  "\ :cfdo %s/<C-r>s//g \| update
+  "\<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
 " The same as above except it works with a visual selection.
 xmap <Leader>R
@@ -636,3 +649,66 @@ nmap <silent> t<C-f> :TestFile<CR>
 nmap <silent> t<C-a> :TestSuite<CR>
 nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-v> :TestVisit<CR>
+
+
+" Mine
+nmap <leader>w :w!<cr>
+nmap <leader>e :ExecuteMake<cr><cr>
+nmap <leader>q :q<cr>
+
+let g:ctrlp_follow_symlinks = 1
+
+if exists("g:devenv") && g:devenv
+  let g:ctrlp_cmd = 'CtrlP ./vim.dev/'
+  set path+=vim.dev/PgwControlPlane/
+  set path+=vim.dev/
+  set tags+=vim.dev/tags
+  let g:tagbar_ctags_bin="~/bin/attila_ctags_exuberant"
+endif
+
+if exists("g:ttcnenv") && g:ttcnenv
+  let g:ctrlp_cmd = 'CtrlP ./vim.ttcn/'
+  set path+=vim.ttcn/ttcn3/
+  set tags+=vim.ttcn/tags
+  let g:tagbar_ctags_bin="~/bin/attila_ctags_universal"
+endif
+
+command ExecuteMake :!screen -d -m make FILE=%
+
+map <C-t> :NERDTreeToggle %<CR>
+let NERDTreeShowHidden=1
+let NERDTreeQuitOnOpen=1
+let NERDTreeWinSize=60
+
+"set to 0 if you want to enable it later via :RainbowToggle
+let g:rainbow_active = 1
+execute "set <xUp>=\e[1;*A"
+execute "set <xDown>=\e[1;*B"
+execute "set <xRight>=\e[1;*C"
+execute "set <xLeft>=\e[1;*D"
+
+map <leader>g :vimgrep // application/{PgwControlPlane/{sacc,charging,signalflowtest,ppb},Support}/**/*.{c,h}*
+            \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+            \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+            \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+            \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+            \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+            \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+            \<left><left><left><left><left><left><left><left>
+
+map <leader>t :vimgrep // ttcn3/testsuites/**/*
+            \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+            \<left><left><left><left><left><left><left><left><left><left>
+
+map <leader>pp :setlocal paste!<cr>
+
+nmap <F8> :TagbarToggle<CR>
+set nolinebreak
+
+" Ctags bindings
+map <leader>cv :botright cope<cr>
+map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
+map <leader>n :cn<cr>
+map <leader>p :cp<cr>
+
+let g:NERDCustomDelimiters = { 'ttcn': { 'left': '// ','rightAlt': ' */', 'leftAlt': '/* ' } }
