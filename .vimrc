@@ -20,7 +20,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'gustafj/vim-ttcn'
 Plug 'zef/vim-cycle'
-
+Plug 'artanikin/vim-synthwave84'
 
 """ Original:
 " Atom One Dark / Light theme.
@@ -712,3 +712,5 @@ map <leader>n :cn<cr>
 map <leader>p :cp<cr>
 
 let g:NERDCustomDelimiters = { 'ttcn': { 'left': '// ','rightAlt': ' */', 'leftAlt': '/* ' } }
+
+colorscheme synthwave84
