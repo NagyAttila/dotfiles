@@ -204,6 +204,7 @@ let mapleader='\'
 let maplocalleader='\'
 
 "set autoindent
+set mouse=a
 set autoread
 set backspace=indent,eol,start
 set backupdir=/tmp//,.
