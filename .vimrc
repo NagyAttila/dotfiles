@@ -18,7 +18,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'luochen1990/rainbow'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'majutsushi/tagbar'
-Plug 'gustafj/vim-ttcn'
+Plug 'NagyAttila/vim-ttcn'
 Plug 'zef/vim-cycle'
 Plug 'artanikin/vim-synthwave84'
 
@@ -155,7 +155,8 @@ if !exists('g:gruvbox_contrast_light')
 endif
 
 " Set the color scheme.
-colorscheme gruvbox
+colorscheme elflord
+colorscheme synthwave84
 set background=dark
 
 " Specific colorscheme settings (must come after setting your colorscheme).
@@ -713,4 +714,12 @@ map <leader>p :cp<cr>
 
 let g:NERDCustomDelimiters = { 'ttcn': { 'left': '// ','rightAlt': ' */', 'leftAlt': '/* ' } }
 
-colorscheme synthwave84
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
+autocmd BufWrite *.ttcn* :call DeleteTrailingWS()
+autocmd BufWrite *.yuml* :call DeleteTrailingWS()
