@@ -101,6 +101,7 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
 
 " A bunch of useful language related snippets (ultisnips is the engine).
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " Automatically show Vim's complete menu while typing.
 Plug 'vim-scripts/AutoComplPop'
@@ -310,8 +311,8 @@ nnoremap <Leader>g gqap
 xnoremap <Leader>g gqa
 
 " Prevent x from overriding what's in the clipboard.
-noremap x "_x
-noremap X "_x
+"noremap x "_x
+"noremap X "_x
 
 " Prevent selecting and pasting from overwriting what you originally copied.
 xnoremap p pgvy
