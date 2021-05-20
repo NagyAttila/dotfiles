@@ -21,6 +21,9 @@ Plug 'majutsushi/tagbar'
 Plug 'NagyAttila/vim-ttcn'
 Plug 'zef/vim-cycle'
 Plug 'artanikin/vim-synthwave84'
+Plug 'scrooloose/vim-slumlord'
+Plug 'aklt/plantuml-syntax'
+Plug 'weirongxu/plantuml-previewer.vim'
 
 """ Original:
 " Atom One Dark / Light theme.
@@ -667,6 +670,28 @@ if exists("g:devenv") && g:devenv
   set path+=vim.dev/
   set tags+=vim.dev/tags
   let g:tagbar_ctags_bin="~/bin/attila_ctags_exuberant"
+  map <leader>g :vimgrep // application/{PgwControlPlane/{sx,sacc,charging,ppb},Support}/**/*.{c,h}*
+              \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+              \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+              \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+              \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+              \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+              \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+              \<left><left><left><left><left><left><left><left><left><left><left>
+
+endif
+
+if exists("g:sftenv") && g:sftenv
+  let g:ctrlp_cmd = 'CtrlP ./vim.sft/'
+  set path+=vim.sft/
+  set tags+=vim.sft/tags
+  let g:tagbar_ctags_bin="~/bin/attila_ctags_universal"
+  map <leader>g :vimgrep // application/PgwControlPlane/signalflowtest/**/*.{c,h}*
+              \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+              \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+              \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+              \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+              \<left><left><left><left>
 endif
 
 if exists("g:ttcnenv") && g:ttcnenv
@@ -674,6 +699,9 @@ if exists("g:ttcnenv") && g:ttcnenv
   set path+=vim.ttcn/ttcn3/
   set tags+=vim.ttcn/tags
   let g:tagbar_ctags_bin="~/bin/attila_ctags_universal"
+  map <leader>g :vimgrep // ttcn3/testsuites/**/*
+              \<left><left><left><left><left><left><left><left><left><left><left><left><left>
+              \<left><left><left><left><left><left><left><left><left><left>
 endif
 
 command ExecuteMake :!screen -d -m make FILE=%
@@ -689,19 +717,6 @@ execute "set <xUp>=\e[1;*A"
 execute "set <xDown>=\e[1;*B"
 execute "set <xRight>=\e[1;*C"
 execute "set <xLeft>=\e[1;*D"
-
-map <leader>g :vimgrep // application/{PgwControlPlane/{sacc,charging,signalflowtest,ppb},Support}/**/*.{c,h}*
-            \<left><left><left><left><left><left><left><left><left><left><left><left><left>
-            \<left><left><left><left><left><left><left><left><left><left><left><left><left>
-            \<left><left><left><left><left><left><left><left><left><left><left><left><left>
-            \<left><left><left><left><left><left><left><left><left><left><left><left><left>
-            \<left><left><left><left><left><left><left><left><left><left><left><left><left>
-            \<left><left><left><left><left><left><left><left><left><left><left><left><left>
-            \<left><left><left><left><left><left><left><left>
-
-map <leader>t :vimgrep // ttcn3/testsuites/**/*
-            \<left><left><left><left><left><left><left><left><left><left><left><left><left>
-            \<left><left><left><left><left><left><left><left><left><left>
 
 map <leader>pp :setlocal paste!<cr>
 
@@ -725,3 +740,5 @@ autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
 autocmd BufWrite *.ttcn* :call DeleteTrailingWS()
 autocmd BufWrite *.yuml* :call DeleteTrailingWS()
+
+let g:plantuml_previewer#plantuml_jar_path = '/home/zattnag/bin/attila_plantuml.jar'
